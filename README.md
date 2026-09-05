@@ -11,6 +11,7 @@ A slack bot for monitoring my docker server
 A Debian based distro is required for apt:
 ```
 git clone https://github.com/craisined/server-slack.git
+cd server-slack
 python3 -m venv --system-site-packages .venv
 sudo .venv/bin/python3 main.py
 ```

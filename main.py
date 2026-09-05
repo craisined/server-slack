@@ -63,12 +63,16 @@ def server_updates(ack, respond, command):
     ack()
     msg = "Fully updated :O"
     with apt.Cache() as cache:
+        cache.update()
+        cache.open()
         cache.upgrade()
         packages_to_upgrade = cache.get_changes()
     if packages_to_upgrade:
         msg = "*Upgradable packages*:\n"
         for p in packages_to_upgrade:
-            msg += f"• {p.name} ({p.installed.version} ⟶ {p.candidate.version})\n"
+            old_ver = p.installed.version if p.installed else "none"
+            new_ver = p.candidate.version if p.candidate else "unknown"
+            msg += f"• {p.name} ({old_ver} ⟶ {new_ver})\n"
     respond(msg)
 
 if __name__ == "__main__":

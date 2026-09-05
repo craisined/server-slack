@@ -8,10 +8,12 @@ A slack bot for monitoring my docker server
 - `/server-updates`: check how long I neglected my server for (lists updatable packages)
 
 # Deployment
+Create a env file containing `SLACK_APP_TOKEN` and `SLACK_BOT_TOKEN`.
 A Debian based distro is required for apt:
 ```
 git clone https://github.com/craisined/server-slack.git
 cd server-slack
+# Copy over env file here
 python3 -m venv --system-site-packages .venv
 source .venv/bin/activate
 pip install -r requirements.txt

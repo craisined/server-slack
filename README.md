@@ -13,6 +13,8 @@ A Debian based distro is required for apt:
 git clone https://github.com/craisined/server-slack.git
 cd server-slack
 python3 -m venv --system-site-packages .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 sudo .venv/bin/python3 main.py
 ```
 

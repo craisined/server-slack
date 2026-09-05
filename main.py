@@ -60,7 +60,16 @@ def server_docker(ack, respond, command):
 
 @app.command("/server-updates")
 def server_updates(ack, respond, command):
-    pass
+    ack()
+    msg = "Fully updated :O"
+    with apt.Cache() as cache:
+        cache.upgrade()
+        packages_to_upgrade = cache.get_changes()
+    if packages_to_upgrade:
+        msg = "*Upgradable packages*:\n"
+        for p in packages_to_upgrade:
+            msg += f"• {p.name} ({p.installed.version} ⟶ {p.candidate.version})\n"
+    respond(msg)
 
 if __name__ == "__main__":
     handler = SocketModeHandler(app, os.environ["SLACK_APP_TOKEN"])
